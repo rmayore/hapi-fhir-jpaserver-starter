@@ -12,6 +12,8 @@ import org.opencds.cqf.fhir.cr.hapi.config.r4.QuestionnaireOperationConfig;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.opencds.cqf.fhir.cr.measure.MeasureEvaluationOptions;
+import org.opencds.cqf.fhir.cql.EvaluationSettings;
 
 @Configuration
 @Conditional({OnR4Condition.class, CrConfigCondition.class})
@@ -26,4 +28,14 @@ import org.springframework.context.annotation.Import;
 	PopulateOperationConfig.class,
 	QuestionnaireOperationConfig.class
 })
-public class StarterCrR4Config {}
+public class StarterCrR4Config {
+	@Bean
+	public MeasureEvaluationOptions measureEvaluationOptions() {
+		return MeasureEvaluationOptions.defaultOptions();
+	}
+
+	@Bean
+	public EvaluationSettings evaluationSettings() {
+		return EvaluationSettings.getDefault();
+	}
+}
